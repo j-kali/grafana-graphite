@@ -9,9 +9,9 @@ RemainAfterExit=yes
 Restart=on-failure
 RestartSec=1m
 ExecStartPre=-/usr/bin/docker network create grafana-graphite
-ExecStartPre=/usr/bin/docker network connect grafana-graphite traefik.service
-ExecStartPre=/usr/bin/docker network connect grafana-graphite graphite.service
-ExecStart=/usr/bin/docker network connect grafana-graphite grafana.service
+ExecStartPre=-/usr/bin/docker network connect grafana-graphite traefik.service
+ExecStartPre=-/usr/bin/docker network connect grafana-graphite graphite.service
+ExecStart=-/usr/bin/docker network connect grafana-graphite grafana.service
 
 [Install]
 WantedBy=default.target
