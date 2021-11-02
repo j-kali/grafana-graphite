@@ -1,7 +1,7 @@
 [Unit]
-Description=%n Graphite Container
-After=network-online.target graphite.service grafana.service
-Wants=network-online.target graphite.service grafana.service
+Description=%n Graphite network
+After=network-online.target graphite.service grafana.service traefik.service
+Wants=network-online.target graphite.service grafana.service traefik.service
 
 [Service]
 Type=oneshot
@@ -9,6 +9,7 @@ RemainAfterExit=yes
 Restart=on-failure
 RestartSec=1m
 ExecStartPre=-/usr/bin/docker network create grafana-graphite
+ExecStartPre=/usr/bin/docker network connect grafana-graphite traefik.service
 ExecStartPre=/usr/bin/docker network connect grafana-graphite graphite.service
 ExecStart=/usr/bin/docker network connect grafana-graphite grafana.service
 
