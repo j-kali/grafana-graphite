@@ -1,0 +1,5 @@
+.ssh
+.cache
+.local
+.config/cni
+.histfile
