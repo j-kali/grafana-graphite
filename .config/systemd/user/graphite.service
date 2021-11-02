@@ -1,0 +1,25 @@
+[Unit]
+Description=%n Graphite Container
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+ExecStartPre=-/usr/bin/podman stop %n
+ExecStartPre=-/usr/bin/podman rm %n
+ExecStartPre=/usr/bin/podman pull graphiteapp/graphite-statsd
+ExecStart=/usr/bin/podman run -d \
+                          --name %n \
+                          --restart=always \
+                          -v /data/graphite/conf:/opt/graphite/conf \
+                          -v /data/graphite/storage:/opt/graphite/storage \
+                          -p 80:80 \
+                          -p 2003-2004:2003-2004 \
+                          -p 2023-2024:2023-2024 \
+                          -p 8125:8125/udp \
+                          -p 8126:8126 \
+                          graphiteapp/graphite-statsd
+
+[Install]
+WantedBy=multi-user.target

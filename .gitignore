@@ -1,3 +1,6 @@
+# Temporary files
+*~
+# Home things to ignore
 .ssh
 .cache
 .local
