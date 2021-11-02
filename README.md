@@ -23,3 +23,21 @@ Installation from the package should be enough.
 Also we need to allow certain port binds for non-root users
 
     sudo sh -c "echo 'net.ipv4.ip_unprivileged_port_start=80' >> /etc/sysctl.conf"
+
+Before graphite can actually be run we need to copy some base structures.
+To do that run:
+
+    podman run -d\
+           --name graphite\
+           --restart=always\
+           -p 80:80\
+           -p 2003-2004:2003-2004\
+           -p 2023-2024:2023-2024\
+           -p 8125:8125/udp\
+           -p 8126:8126\
+           graphiteapp/graphite-statsd
+    podman stop graphite
+
+Find volumes for `/opt/graphite/conf` and `/opt/graphite/storage`.
+Then copy their contents to `/data/graphite/{conf,storage}`.
+After that just `podman rm graphite`
