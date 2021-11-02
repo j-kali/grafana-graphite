@@ -28,6 +28,6 @@ ExecStart=/usr/bin/docker run \
                           -e GF_USERS_ALLOW_SIGN_UP=false \
                           -e GF_SECURITY_ADMIN_USER=admin \
                           -e GF_SECURITY_ADMIN_PASSWORD=graphana \
-                          grafana/grafana
+                          grafana
 [Install]
 WantedBy=default.target
