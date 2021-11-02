@@ -6,12 +6,14 @@ Wants=network-online.target
 [Service]
 TimeoutStartSec=0
 Restart=always
+ExecStartPre=/usr/bin/flock %h/bin/pass-init.sh %h/bin/pass-init.sh %h/.grafana-pass
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
-ExecStartPre=/usr/bin/docker pull grafana
+ExecStartPre=/usr/bin/docker pull grafana/grafana
 ExecStart=/usr/bin/docker run \
                           --name %n \
                           -v grafana-data:/var/lib/grafana \
+                          -v %h/.grafana-pass:/grafana-pass \
                           --label traefik.http.routers.grafana.entryPoints=port80 \
                           --label traefik.http.routers.grafana.rule=host(`monitoring.sulku.net`) \
                           --label traefik.http.middlewares.grafana-redirect.redirectScheme.scheme=https \
@@ -21,13 +23,13 @@ ExecStart=/usr/bin/docker run \
                           --label traefik.http.routers.grafana-ssl.rule=host(`monitoring.sulku.net`) \
                           --label traefik.http.routers.grafana-ssl.tls=true \
                           --label traefik.http.routers.grafana-ssl.tls.certResolver=letsencrypt \
-                          --label traefik.http.routers.grafana-ssl.service=some-name-ssl \
+                          --label traefik.http.routers.grafana-ssl.service=grafana-ssl \
                           --label traefik.http.services.grafana-ssl.loadBalancer.server.port=3000 \
                           -e GF_SERVER_ROOT_URL=https://monitoring.sulku.net \
                           -e GF_SERVER_DOMAIN=monitoring.sulku.net \
                           -e GF_USERS_ALLOW_SIGN_UP=false \
                           -e GF_SECURITY_ADMIN_USER=admin \
-                          -e GF_SECURITY_ADMIN_PASSWORD=graphana \
+                          -e GF_SECURITY_ADMIN_PASSWORD__FILE=/grafana-pass \
                           grafana/grafana
 [Install]
 WantedBy=default.target
