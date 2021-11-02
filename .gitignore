@@ -1,0 +1,7 @@
+.ssh
+.cache
+.local
+.config/cni
+.histfile
+.gnupg
+.bash_logout
