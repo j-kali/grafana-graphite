@@ -6,6 +6,7 @@ Wants=network-online.target
 [Service]
 TimeoutStartSec=0
 Restart=always
+ExecStartPre=/usr/bin/flock %h/bin/pass-init.sh %h/bin/pass-init.sh %h/.grafana-pass
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
 ExecStartPre=/usr/bin/docker pull grafana/grafana
@@ -27,7 +28,7 @@ ExecStart=/usr/bin/docker run \
                           -e GF_SERVER_DOMAIN=monitoring.sulku.net \
                           -e GF_USERS_ALLOW_SIGN_UP=false \
                           -e GF_SECURITY_ADMIN_USER=admin \
-                          -e GF_SECURITY_ADMIN_PASSWORD=graphana \
+                          -e GF_SECURITY_ADMIN_PASSWORD__FILE=%h/.grafana-pass \
                           grafana/grafana
 [Install]
 WantedBy=default.target
