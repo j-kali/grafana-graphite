@@ -2,9 +2,9 @@
 
 Graphite + Grafana remote server
 
-## Podman setup
+## Docker setup
 
-Installation from the package should be enough.
+We will be running docker in rootless mode. (instruction for ubuntu 20.04)
 
     sudo apt-get install ca-certificates curl gnupg lsb-release
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
