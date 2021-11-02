@@ -9,7 +9,7 @@ Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
 ExecStartPre=/usr/bin/docker pull graphiteapp/graphite-statsd
-ExecStart=/usr/bin/docker run -d \
+ExecStart=/usr/bin/docker run \
                           --name %n \
                           --restart=always \
                           -v /data/graphite/conf:/opt/graphite/conf \
