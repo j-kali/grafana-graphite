@@ -31,6 +31,7 @@ ExecStart=/usr/bin/docker run \
                           -e GF_SECURITY_ADMIN_USER=admin \
                           -e GF_SECURITY_ADMIN_PASSWORD__FILE=/grafana-pass \
                           -e GF_AUTH_ANONYMOUS_ENABLED=true \
+                          --network grafana-graphite
                           grafana/grafana
 
 [Install]
