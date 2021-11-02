@@ -8,3 +8,10 @@
 .histfile
 .gnupg
 .bash_logout
+
+.config/docker
+.config/systemd/user/default.target.wants/docker.service
+.config/systemd/user/docker.service
+.docker
+.lesshst
+.sudo_as_admin_successful
