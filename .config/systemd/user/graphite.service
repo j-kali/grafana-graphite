@@ -14,7 +14,7 @@ ExecStart=/usr/bin/podman run -d \
                           --restart=always \
                           -v /data/graphite/conf:/opt/graphite/conf \
                           -v /data/graphite/storage:/opt/graphite/storage \
-                          -p 80:80 \
+                          -p 8080:80 \
                           -p 2003-2004:2003-2004 \
                           -p 2023-2024:2023-2024 \
                           -p 8125:8125/udp \
