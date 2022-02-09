@@ -16,26 +16,27 @@ We will be running docker in rootless mode. (instruction for ubuntu 20.04)
     sudo systemctl disable --now docker.service docker.socket
     dockerd-rootless-setuptool.sh install -f
 
+Or just:
+
+    ./install-docker.sh
+
 ## Installation
 
     cd
     git init
     git remote add origin git@github.com:kofeinu/monitoring-vm
     git pull origin master
+    systemctl --user daemon-reload
 
 Also we need to allow certain port binds for non-root users
 
+    sudo sysctl net.ipv4.ip_unprivileged_port_start=80
     sudo sh -c "echo 'net.ipv4.ip_unprivileged_port_start=80' >> /etc/sysctl.conf"
 
-Before graphite can actually be run we need to copy some base structures.
-To do that run:
+Before graphite can actually be run we need storage locations in `/data/graphite/{conf,storage}`
 
-    docker run -d\
-           --name graphite\
-           --restart=always\
-           graphiteapp/graphite-statsd
-    docker stop graphite
+For proper `HTTPS` setup you need to define `GRAFANA_DOMAIN` and `DOMAIN_EMAIL`, e.g.,:
 
-Find volumes for `/opt/graphite/conf` and `/opt/graphite/storage`.
-Then copy their contents to `/data/graphite/{conf,storage}`.
-After that just `docker rm graphite`
+    echo "GRAFANA_DOMAIN=$(curl ifconfig.io 2> /dev/null) | rev | cut -d " " -f 1 | tail -c +2 | rev" > ${HOME}/.config/environment.d/GRAFANA_DOMAIN.conf
+    echo "DOMAIN_EMAIL=cute.kitten@playing.ball" > ${HOME}/.config/environment.d/DOMAIN_EMAIL.conf
+    systemctl --user daemon-reload
