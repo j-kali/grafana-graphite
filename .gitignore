@@ -8,6 +8,11 @@
 .histfile
 .gnupg
 .bash_logout
+# Config files
+.bashrc
+.emacs
+.profile
+.tmux.conf
 
 .config/docker
 .config/systemd/user/default.target.wants/docker.service
