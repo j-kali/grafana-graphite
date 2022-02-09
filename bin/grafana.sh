@@ -1,7 +1,7 @@
 #!/bin/bash -eu
 /usr/bin/docker run \
                 --name "${1}" \
-                -v grafana-data:/var/lib/grafana \
+                -v /data/grafana:/var/lib/grafana \
                 -v "${HOME}/.grafana-pass:/grafana-pass" \
                 --label traefik.http.routers.grafana.entryPoints=port80 \
                 --label "traefik.http.routers.grafana.rule=host(\`${GRAFANA_DOMAIN}\`)" \

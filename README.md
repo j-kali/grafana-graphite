@@ -33,7 +33,10 @@ Also we need to allow certain port binds for non-root users
     sudo sysctl net.ipv4.ip_unprivileged_port_start=80
     sudo sh -c "echo 'net.ipv4.ip_unprivileged_port_start=80' >> /etc/sysctl.conf"
 
-Before graphite can actually be run we need storage locations in `/data/graphite/{conf,storage}`
+Before graphite and grafana can actually be run we need storage locations in:
+
+- `/data/graphite/{conf,storage}`
+- `/data/grafana`
 
 For proper `HTTPS` setup you need to define `GRAFANA_DOMAIN` and `DOMAIN_EMAIL`, e.g.,:
 
