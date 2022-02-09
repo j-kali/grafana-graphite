@@ -9,3 +9,4 @@ sudo groupadd docker || true
 sudo usermod -aG docker "${USER}"
 sudo systemctl disable --now docker.service docker.socket
 dockerd-rootless-setuptool.sh install -f
+sudo loginctl enable-linger ubuntu
