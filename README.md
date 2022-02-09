@@ -24,7 +24,7 @@ Or just:
 
     cd
     git init
-    git remote add origin git@github.com:kofeinu/monitoring-vm
+    git remote add origin git@github.com:j-kali/grafana-graphite
     git pull origin master
     systemctl --user daemon-reload
 
