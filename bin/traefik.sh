@@ -3,7 +3,7 @@
                 --name "${1}" \
                 -p 443:443 \
                 -p 80:80 \
-                -v traefik-data:/letsencrypt/ \
+                -v "${TRAEFIK_DATA:-traefik-data}:/letsencrypt/" \
                 -v /run/user/1000/docker.sock:/var/run/docker.sock \
                 --network grafana-graphite \
                 traefik \
