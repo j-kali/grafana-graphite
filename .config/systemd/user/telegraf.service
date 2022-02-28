@@ -1,0 +1,14 @@
+[Unit]
+Description=%n Grafana Container
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+ExecStartPre=-/usr/bin/docker stop %n
+ExecStartPre=-/usr/bin/docker rm %n
+ExecStart=%h/bin/telegraf.sh %n
+
+[Install]
+WantedBy=default.target
