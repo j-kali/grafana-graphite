@@ -21,4 +21,4 @@
                 -e GF_SECURITY_ADMIN_PASSWORD__FILE=/grafana-pass \
                 -e GF_AUTH_ANONYMOUS_ENABLED=true \
                 --network grafana-graphite \
-                grafana/grafana
+                grafana/grafana:"${GRAFANA_VERSION:-latest}"

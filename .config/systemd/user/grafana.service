@@ -9,7 +9,6 @@ Restart=always
 ExecStartPre=/usr/bin/flock %h/bin/pass-init.sh %h/bin/pass-init.sh %h/.grafana-pass
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
-ExecStartPre=/usr/bin/docker pull grafana/grafana
 ExecStart=%h/bin/grafana.sh %n
 
 [Install]
