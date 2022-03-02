@@ -1,5 +1,5 @@
 [Unit]
-Description=%n Grafana Container
+Description=%n Telegraf Container
 After=network-online.target
 Wants=network-online.target
 

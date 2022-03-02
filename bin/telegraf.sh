@@ -1,6 +1,7 @@
 #!/bin/bash -eu
 /usr/bin/docker run \
                 --name "${1}" \
+                --hostname "$(hostname)" \
                 -v /data:/data \
                 -v /:/mnt/root \
                 -v "${HOME}/telegraf.conf":/etc/telegraf/telegraf.conf \
