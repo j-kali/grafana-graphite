@@ -20,5 +20,6 @@
                 -e GF_SECURITY_ADMIN_USER=admin \
                 -e GF_SECURITY_ADMIN_PASSWORD__FILE=/grafana-pass \
                 -e GF_AUTH_ANONYMOUS_ENABLED=true \
+                $(printenv | grep -e '^GF_' | sed -e 's/^/-e /g' | sed -z 's/\n/ /g') \
                 --network grafana-graphite \
                 grafana/grafana:"${GRAFANA_VERSION:-latest}"
