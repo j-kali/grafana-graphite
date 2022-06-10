@@ -1,0 +1,15 @@
+[Unit]
+Description=%n HTTPS Proxy for graphite
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+ExecStartPre=-/usr/bin/docker stop %n
+ExecStartPre=-/usr/bin/docker rm %n
+ExecStartPre=%h/bin/https-graphite-build.sh
+ExecStart=%h/bin/https-graphite.sh %n
+
+[Install]
+WantedBy=default.target
